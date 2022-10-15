@@ -4,5 +4,11 @@
       "path": "."
     }
   ],
-  "settings": { "editor.formatOnSave": true }
+  "settings": {
+    "editor.formatOnSave": true
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": []
+  }
 }
