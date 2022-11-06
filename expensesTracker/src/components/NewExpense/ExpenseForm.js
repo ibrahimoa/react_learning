@@ -9,6 +9,8 @@ const ExpenseForm = (props) => {
     enteredDate: "",
   });
 
+  const [formState, setFormState] = useState(false);
+
   const titleChangeHandler = (event) => {
     setUserInput((prevState) => {
       return { ...prevState, enteredTitle: event.target.value };
@@ -30,16 +32,35 @@ const ExpenseForm = (props) => {
   const submitHandler = (event) => {
     event.preventDefault();
 
-    const expenseData = {
-      title: userInput.enteredTitle,
-      amount: userInput.enteredAmount,
-      date: new Date(userInput.enteredDate),
-    };
+    if (event.nativeEvent.submitter.value === "add") {
+      const expenseData = {
+        title: userInput.enteredTitle,
+        amount: +userInput.enteredAmount,
+        date: new Date(userInput.enteredDate),
+      };
 
-    props.onSaveExpenseData(expenseData);
+      props.onSaveExpenseData(expenseData);
 
-    setUserInput({ enteredTitle: "", enteredAmount: "", enteredDate: "" });
+      setUserInput({ enteredTitle: "", enteredAmount: "", enteredDate: "" });
+    }
+
+    setFormState(false);
   };
+
+  const newExpenseSubmitHandler = (event) => {
+    event.preventDefault();
+    setFormState(true);
+  };
+
+  if (formState === false) {
+    return (
+      <form onSubmit={newExpenseSubmitHandler}>
+        <div className="new-expense__actions_new">
+          <button type="submit">Add New Expense</button>
+        </div>
+      </form>
+    );
+  }
 
   return (
     <form onSubmit={submitHandler}>
@@ -74,7 +95,12 @@ const ExpenseForm = (props) => {
         </div>
       </div>
       <div className="new-expense__actions">
-        <button type="submit">Add Expense</button>
+        <button type="submit" value="cancel">
+          Cancel
+        </button>
+        <button type="submit" value="add">
+          Add Expense
+        </button>
       </div>
     </form>
   );
