@@ -22,7 +22,7 @@ function App() {
 
   return (
     <div>
-      <h2>Expenses Tracker</h2>
+      <h2 style={{ textAlign: "center" }}>Expenses Tracker</h2>
       <NewExpense onAddExpense={addExpenseHandler}></NewExpense>
       <Expenses expenses={expenses}></Expenses>
     </div>
