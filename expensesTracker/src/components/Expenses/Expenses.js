@@ -18,7 +18,7 @@ function Expenses(props) {
   );
 
   return (
-    <div>
+    <React.Fragment>
       <Card className="expenses">
         <ExpensesFilter
           selected={filteredYear}
@@ -27,7 +27,7 @@ function Expenses(props) {
         <ExpensesChart expenses={filteredExpenses}></ExpensesChart>
         <ExpensesList expenses={filteredExpenses}></ExpensesList>
       </Card>
-    </div>
+    </React.Fragment>
   );
 }
 

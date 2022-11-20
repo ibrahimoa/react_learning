@@ -21,11 +21,11 @@ function App() {
   };
 
   return (
-    <div>
+    <React.Fragment>
       <h2 style={{ textAlign: "center" }}>Expenses Tracker</h2>
       <NewExpense onAddExpense={addExpenseHandler}></NewExpense>
       <Expenses expenses={expenses}></Expenses>
-    </div>
+    </React.Fragment>
   );
 }
 
