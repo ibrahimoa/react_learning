@@ -3,6 +3,7 @@ import { Component } from "react";
 import classes from "./UserFinder.module.css";
 import UsersContext from "../store/users-context";
 import Users from "./Users";
+import ErrorBoundary from "./ErrorBoundary";
 
 class UserFinder extends Component {
   // The way useContext() is implemented with this approach.
@@ -38,7 +39,9 @@ class UserFinder extends Component {
     return (
       <div className={classes.finder}>
         <input type="search" onChange={this.searchChangeHandler.bind(this)} />
-        <Users users={this.state.filteredUsers} />
+        <ErrorBoundary>
+          <Users users={this.state.filteredUsers} />
+        </ErrorBoundary>
       </div>
     );
   }
