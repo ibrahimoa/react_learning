@@ -4,6 +4,9 @@ import MoviesList from "./components/MoviesList";
 import AddMovie from "./components/AddMovie";
 import "./App.css";
 
+const MOVIES_DATA_BASE =
+  "https://react-http-3cd7d-default-rtdb.europe-west1.firebasedatabase.app/movies.json";
+
 function App() {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -14,9 +17,7 @@ function App() {
     setError(null);
     try {
       // Instead of fetch().then().then().catch() we can use async-await.
-      const response = await fetch(
-        "https://react-http-3cd7d-default-rtdb.europe-west1.firebasedatabase.app/movies.json"
-      );
+      const response = await fetch(MOVIES_DATA_BASE);
 
       if (!response.ok) {
         throw new Error("Something went wrong!");
@@ -55,16 +56,13 @@ function App() {
 
   async function addMovieHandler(movie) {
     try {
-      const response = await fetch(
-        "https://react-http-3cd7d-default-rtdb.europe-west1.firebasedatabase.app/movies.json",
-        {
-          method: "POST", // By default is GET.
-          body: JSON.stringify(movie),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch(MOVIES_DATA_BASE, {
+        method: "POST", // By default is GET.
+        body: JSON.stringify(movie),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       if (!response.ok) {
         throw new Error("Something went wrong!");
